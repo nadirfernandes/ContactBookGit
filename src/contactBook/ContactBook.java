@@ -1,7 +1,5 @@
 package contactBook;
 
-import contactBook.Contact;
-
 public class ContactBook {
     static final int DEFAULT_SIZE = 100;
 
@@ -51,8 +49,8 @@ public class ContactBook {
     }
 
     /**
-     * It returns the name of the firt contact with that number.
-     * @param phone
+     * It returns the name of the first contact with that number.
+     * @param phone phone number
      * @return name of the first contact with the given phone number.
      */
     public String getName(int phone) {return contacts[searchIndexPhone(phone)].getName();}
@@ -82,7 +80,7 @@ public class ContactBook {
 
     /**
      * Looks for the first contact with the given phone number.
-     * @param phone
+     * @param phone phone number
      * @return index of the given number
      */
     private int searchIndexPhone(int phone) {
@@ -96,6 +94,30 @@ public class ContactBook {
                 i++;
         if (found) result = i;
         return result;
+    }
+
+    /**
+     * Check if there is any repeated phone numbers
+     * @return if there is any repeated phone numbers
+     */
+    private boolean hasRepeatedPhones()
+    {
+        int i = 0;
+        boolean found = false;
+        while (i<counter && !found)
+        {
+            int j = 0;
+            while (j<counter && !found)
+            {
+                if (contacts[i].getPhone() == contacts[j].getPhone())
+                {
+                    found = true;
+                }
+                j++;
+            }
+            i++;
+        }
+        return found;
     }
 
     private void resize() {
