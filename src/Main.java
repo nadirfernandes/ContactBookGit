@@ -1,6 +1,5 @@
 import contactBook.Contact;
 import contactBook.ContactBook;
-
 import java.util.Scanner;
 
 
@@ -13,6 +12,8 @@ public class Main {
     public static final String SET_PHONE      = "SP";
     public static final String SET_EMAIL      = "SE";
     public static final String LIST_CONTACTS  = "LC";
+    public static final String SEARCH_CONTACT_PHONE = "GN";
+    public static final String CHECK_REPEATED_CONTACT = "EP";
     public static final String QUIT           = "Q";
 
     //Constantes que definem as mensagens para o utilizador
@@ -22,6 +23,9 @@ public class Main {
     public static final String CONTACT_REMOVED = "contactBook.Contact removed.";
     public static final String CONTACT_UPDATED = "contactBook.Contact updated.";
     public static final String BOOK_EMPTY = "contactBook.Contact book empty.";
+    public static final String PHONE_NOT_EXIST = "contactBook.Phone number does not exist.";
+    public static final String CONTACTS_SHARE_PHONE = "There are contacts that share phone numbers.";
+    public static final String CONTACTS_DIFFERENT_PHONE = "All contacts have different phone numbers.";
     public static final String QUIT_MSG = "Goodbye!";
     public static final String COMMAND_ERROR = "Unknown command.";
 
@@ -52,6 +56,12 @@ public class Main {
                     break;
                 case LIST_CONTACTS:
                     listAllContacts(cBook);
+                    break;
+                case SEARCH_CONTACT_PHONE:
+                    searchContactsByPhone(in, cBook);
+                    break;
+                case CHECK_REPEATED_CONTACT:
+                    checkRepeatedContacts(cBook);
                     break;
                 default:
                     System.out.println(COMMAND_ERROR);
@@ -147,4 +157,22 @@ public class Main {
         }
         else System.out.println(BOOK_EMPTY);
     }
+
+    private static void searchContactsByPhone(Scanner in, ContactBook cBook) {
+        int phone;
+        phone= in.nextInt(); in.nextLine();
+        String contactName = cBook.getName(phone);
+        if (contactName != null)
+            System.out.println(contactName);
+        else
+            System.out.println(PHONE_NOT_EXIST);
+    }
+
+    private static void checkRepeatedContacts(ContactBook cBook) {
+        if (cBook.hasRepeatedPhones())
+            System.out.println(CONTACTS_SHARE_PHONE);
+        else
+            System.out.println(CONTACTS_DIFFERENT_PHONE);
+    }
+
 }

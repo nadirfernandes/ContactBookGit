@@ -100,7 +100,7 @@ public class ContactBook {
      * Check if there is any repeated phone numbers
      * @return if there is any repeated phone numbers
      */
-    private boolean hasRepeatedPhones()
+    public boolean hasRepeatedPhones()
     {
         int i = 0;
         boolean found = false;
