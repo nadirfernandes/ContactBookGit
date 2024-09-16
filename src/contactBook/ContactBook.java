@@ -53,7 +53,14 @@ public class ContactBook {
      * @param phone phone number
      * @return name of the first contact with the given phone number.
      */
-    public String getName(int phone) {return contacts[searchIndexPhone(phone)].getName();}
+    public String getName(int phone)
+    {
+        int idx = searchIndexPhone(phone);
+        if(idx >= 0)
+            return contacts[idx].getName();
+        else
+            return null;
+    }
 
     //Pre: name != null && hasContact(name)
     public void setPhone(String name, int phone) {
@@ -109,7 +116,7 @@ public class ContactBook {
             int j = 0;
             while (j<counter && !found)
             {
-                if (contacts[i].getPhone() == contacts[j].getPhone())
+                if (i!=j && contacts[i].getPhone() == contacts[j].getPhone())
                 {
                     found = true;
                 }
